@@ -1,0 +1,21 @@
+<configuration>
+
+    <!-- Appenders -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- Set encoder for console logs -->
+        <encoder>
+            <pattern>%highlight(%d{yyyy-MM-dd HH:mm:ss.SSS} [%-4level] %logger{36} - %msg%n)</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Loggers -->
+    <logger name="dev.brammie15.main" level="error" additivity="false">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <!-- Root logger -->
+    <root level="info">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+</configuration>
