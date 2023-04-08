@@ -8,6 +8,8 @@ public interface KeepscoreRoute {
 
     public String PATH();
 
+    public byte FUNCTIONS();
+
     public Object GET(Request req, Response res);
 
     public Object POST(Request req, Response res);

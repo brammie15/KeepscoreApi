@@ -1,24 +1,24 @@
 package dev.brammie15.objects;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-@DatabaseTable(tableName = "student")
+@Entity
 public class Student {
-    @DatabaseField(generatedId = true)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @DatabaseField
-    private String name;
-    @DatabaseField
-    private String classId;
-
-    public Student(int id, String name, String classId) {
-        this.id = id;
-        this.name = name;
-        this.classId = classId;
-    }
+    private String firstName;
+    private String lastName;
 
     public Student() {
+    }
+
+    public Student(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public int getId() {
@@ -29,19 +29,19 @@ public class Student {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getClassId() {
-        return classId;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setClassId(String classId) {
-        this.classId = classId;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

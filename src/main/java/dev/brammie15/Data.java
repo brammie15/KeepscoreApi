@@ -1,53 +1,47 @@
 package dev.brammie15;
 
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.jdbc.JdbcConnectionSource;
-import com.j256.ormlite.table.TableUtils;
 import dev.brammie15.objects.Class;
-import dev.brammie15.objects.Student;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.slf4j.Logger;
 
 import java.sql.SQLException;
 
 public class Data {
     String databaseURL = "jdbc:mysql://localhost:3306/keepscore";
-    private JdbcConnectionSource connectionSource = null;
-    Dao<Class, Integer> classDao = null;
 
-    Dao<Student, Integer> studentDao = null;
-
+    private SessionFactory sessionFactory;
     public Data(){
         init();
     }
     public void init() {
+        Logger logger = org.slf4j.LoggerFactory.getLogger(Data.class);
+        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure("hibernate.cfg.xml")
+                .build();
         try {
-            connectionSource = new JdbcConnectionSource(databaseURL);
-            connectionSource.setUsername("root");
-            connectionSource.setPassword("");
-
-        } catch (SQLException e) {
-            System.out.println("Error connecting to database");
-            throw new RuntimeException(e);
-        }
-        try {
-            TableUtils.createTableIfNotExists(connectionSource, Class.class);
-            classDao = DaoManager.createDao(connectionSource, Class.class);
-
-            TableUtils.createTableIfNotExists(connectionSource, Student.class);
-            studentDao = DaoManager.createDao(connectionSource, Student.class);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        } catch (Exception e) {
+            StandardServiceRegistryBuilder.destroy(registry);
+            logger.error("Error creating session factory", e);
         }
     }
+    public void test(){
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Class c = new Class();
+        c.setName("test");
+        session.persist(c);
+        session.getTransaction().commit();
 
-    public Dao<Class, Integer> getClassDao() {
-        return classDao;
+        Class newclass = session.get(Class.class, 1);
+        System.out.println(Constants.GSON.toJsonTree(newclass).toString());
+        session.close();
     }
-    public Dao<Student, Integer> getStudentDao() {
-        return studentDao;
-    }
-
-    public JdbcConnectionSource getConnection() {
-        return connectionSource;
+    public SessionFactory getConnection() {
+        return sessionFactory;
     }
 }

@@ -19,22 +19,27 @@ public class HealthRoute implements KeepscoreRoute {
     }
 
     @Override
+    public byte FUNCTIONS() {
+        return Constants.GET | Constants.POST | Constants.PUT | Constants.DELETE;
+    }
+
+    @Override
     public Object GET(Request req, Response res) {
-        return "OK";
+        return "GET OK";
     }
 
     @Override
     public Object POST(Request req, Response res) {
-        return "OK";
+        return "POST OK";
     }
 
     @Override
     public Object PUT(Request req, Response res) {
-        return null;
+        return "PUT OK";
     }
 
     @Override
     public Object DELETE(Request req, Response res) {
-        return null;
+        return "DELETE OK";
     }
 }

@@ -1,14 +1,22 @@
 package dev.brammie15.objects;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-@DatabaseTable(tableName = "class")
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 public class Class {
-    @DatabaseField(generatedId = true)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @DatabaseField
+
     private String name;
+
+//    TODO: Make the class actually have students (ill fix soon cuz tired)
 
     public Class() {
     }

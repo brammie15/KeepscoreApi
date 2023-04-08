@@ -5,14 +5,12 @@ import dev.brammie15.Data;
 import dev.brammie15.objects.Student;
 import dev.brammie15.response.StandardResponse;
 import dev.brammie15.response.StatusResponse;
+import dev.brammie15.service.ServiceUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 
-import java.sql.SQLException;
-
-import static dev.brammie15.route.RouteUtils.standardGetMethod;
 
 public class StudentRoute implements KeepscoreRoute{
     public Data data;
@@ -27,8 +25,20 @@ public class StudentRoute implements KeepscoreRoute{
     }
 
     @Override
+    public byte FUNCTIONS() {
+        return Constants.GET | Constants.PUT | Constants.DELETE;
+    }
+
+    @Override
     public Object GET(Request req, Response res) {
-        return standardGetMethod(req, res, data.getStudentDao());
+        Student s = null;
+        try {
+            s = ServiceUtils.getById(req.params(":id"), Student.class, data.getConnection().openSession());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new StandardResponse(StatusResponse.ERROR, e.getMessage());
+        }
+        return new StandardResponse(StatusResponse.SUCCESS, Constants.GSON.toJsonTree(s));
     }
 
     @Override
