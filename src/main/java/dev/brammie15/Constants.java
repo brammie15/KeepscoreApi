@@ -54,6 +54,7 @@ public class Constants {
     private Constants() {}
 
     public static final String API_VERSION = "v1";
+    //TODO: Make the version actually mean something
 
     public static final Gson GSON = new Gson();
 

@@ -58,7 +58,7 @@ public class StudentAnyRoute implements KeepscoreRoute{
         }
 
         try {
-            ServiceUtils.add(newStudent, Student.class, data.getConnection().openSession());
+            ServiceUtils.add(newStudent, data.getConnection().openSession());
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new StandardResponse(StatusResponse.ERROR, e.getMessage());

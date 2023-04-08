@@ -16,31 +16,38 @@ public class Student {
     public Student() {
     }
 
-    public Student(String firstName, String lastName) {
+    @SuppressWarnings("unused")
+    Student(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
+    @SuppressWarnings("unused")
     public int getId() {
         return id;
     }
 
+    @SuppressWarnings("unused")
     public void setId(int id) {
         this.id = id;
     }
 
+    @SuppressWarnings("unused")
     public String getFirstName() {
         return firstName;
     }
 
+    @SuppressWarnings("unused")
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    @SuppressWarnings("unused")
     public String getLastName() {
         return lastName;
     }
 
+    @SuppressWarnings("unused")
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }

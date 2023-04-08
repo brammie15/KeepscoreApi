@@ -57,7 +57,7 @@ public class ClassAnyRoute implements KeepscoreRoute {
             return new StandardResponse(StatusResponse.ERROR, "Invalid JSON");
         }
         try {
-            ServiceUtils.add(newClass, Class.class, data.getConnection().openSession());
+            ServiceUtils.add(newClass, data.getConnection().openSession());
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new StandardResponse(StatusResponse.ERROR, e.getMessage());

@@ -5,9 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 public class Class {
     @Id
@@ -20,22 +17,27 @@ public class Class {
 
     public Class() {
     }
+    @SuppressWarnings("unused")
     public Class(String name) {
         this.name = name;
     }
 
+    @SuppressWarnings("unused")
     public int getId() {
         return id;
     }
 
+    @SuppressWarnings("unused")
     public void setId(int id) {
         this.id = id;
     }
 
+    @SuppressWarnings("unused")
     public String getName() {
         return name;
     }
 
+    @SuppressWarnings("unused")
     public void setName(String name) {
         this.name = name;
     }

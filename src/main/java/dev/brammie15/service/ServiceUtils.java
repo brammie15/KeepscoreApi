@@ -16,14 +16,14 @@ public class ServiceUtils {
         return o;
     }
 
-    public static <T> void add(Object o, Class<T> c, Session session) throws Exception {
+    public static void add(Object o, Session session)  {
         session.beginTransaction();
         session.persist(o);
         session.getTransaction().commit();
         session.close();
     }
 
-    public static <T> List<T> getAll(Class<T> c, Session session) throws Exception {
+    public static <T> List<T> getAll(Class<T> c, Session session) {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(c);
         criteria.from(c);
